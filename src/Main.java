@@ -7,57 +7,71 @@ public class Main {
         Scanner input = new Scanner(System.in);
         boolean isRunning = true;
 
-        //looping untuk mengulang inputan
-        while (isRunning){
+        // Looping untuk mengulang inputan dan perhitungan
+        while (isRunning) {
             String hasil = "";
+
+            // Meminta input angka pertama
             System.out.print("\nMasukkan angka pertama: ");
-            double firstNumber;
-            //validasi inputan hanya boleh angka
+            int firstNumber;
+            // Validasi inputan hanya boleh angka
             try {
-                firstNumber = input.nextDouble();
+                firstNumber = input.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Maaf, input yang anda masukan tidak valid.");
+                System.out.println("Maaf, input yang anda masukkan tidak valid.");
                 input.nextLine(); // Membersihkan buffer input
                 continue;
             }
 
+            // Meminta input angka kedua
             System.out.print("Masukkan angka kedua: ");
-            double secondNumber = 0;
-
-            //validasi inputan hanya boleh angka
+            int secondNumber = 0;
+            // Validasi inputan hanya boleh angka
             try {
-                secondNumber = input.nextDouble();
+                secondNumber = input.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Maaf, input yang anda masukan tidak valid.");
+                System.out.println("Maaf, input yang anda masukkan tidak valid.");
                 input.nextLine(); // Membersihkan buffer input
                 continue;
             }
 
-            System.out.println("Masukkan Operator :");
+            // Meminta input operator
+            System.out.println("Masukkan Operator (*, +, -, /):");
             String operator = input.next();
-                //kondisi jika memasukkan operator
-                if (operator.equalsIgnoreCase("*")){
-                    hasil =  String.valueOf(firstNumber * secondNumber); // Perkalian
-                }else if(operator.equalsIgnoreCase("+")){
-                    hasil =  String.valueOf(firstNumber + secondNumber); // Penjumlahan
-                }else if(operator.equalsIgnoreCase("-")){
-                    hasil =  String.valueOf(firstNumber - secondNumber); // Pengurangan
-                }else if(operator.equalsIgnoreCase("/")){
-                    // Kondisi jika inputan pada pembagian berangka 0
-                    if (secondNumber == 0 || firstNumber==0){
-                        hasil = "Pembagian angka tidak boleh 0";
-                    }else {
-                        hasil =  String.valueOf(firstNumber / secondNumber); // Pembagian
-                    }
+            // Kondisi jika memasukkan operator
+            if (operator.equalsIgnoreCase("*")) {
+                hasil = String.valueOf(firstNumber * secondNumber); // Perkalian
+            } else if (operator.equalsIgnoreCase("+")) {
+                hasil = String.valueOf(firstNumber + secondNumber); // Penjumlahan
+            } else if (operator.equalsIgnoreCase("-")) {
+                hasil = String.valueOf(firstNumber - secondNumber); // Pengurangan
+            } else if (operator.equalsIgnoreCase("/")) {
+                // Kondisi jika inputan pada pembagian berangka 0
+                if (secondNumber == 0 || firstNumber == 0) {
+                    hasil = "Pembagian angka tidak boleh 0";
+                } else {
+                    hasil = String.valueOf((double) firstNumber / secondNumber); // Pembagian
                 }
-                // Kondisi jika operator selain tanda *, /, +, -
-                else if (!(operator.equalsIgnoreCase("*")||operator.equalsIgnoreCase("+")||operator.equalsIgnoreCase("-")||operator.equalsIgnoreCase("/"))){
-                    hasil = "Operator tidak valid! Masukkan operator yang benar.";
-                }
+            } else {
+                hasil = "Operator tidak valid! Masukkan operator yang benar.";
+            }
 
-            System.out.print("Hasil :" +hasil); //
+            // Menampilkan hasil perhitungan
+            System.out.println("Hasil: " + hasil);
 
+            // Membersihkan buffer input sebelum meminta inputan selanjutnya
+            input.nextLine();
+
+            // Meminta pengguna untuk menghitung lagi atau berhenti
+            System.out.print("Menghitung lagi (Ya/Tidak): ");
+            String answer = input.nextLine();
+            if (answer.equalsIgnoreCase("Tidak")) {
+                isRunning = false;
+            }
         }
+
+        // Menutup scanner setelah program selesai
+        input.close();
 
     }
 
